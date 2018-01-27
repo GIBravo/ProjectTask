@@ -14,4 +14,12 @@ class Task extends taskBase{
             FROM task
         ");
     }
+
+    /**
+     * Override.
+     * @return bool
+     */
+    public function canDelete(){
+        return true;
+    }
 }

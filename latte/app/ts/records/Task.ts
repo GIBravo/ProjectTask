@@ -18,6 +18,25 @@ module latte{
         //endregion
 
         //region Methods
+        /**
+         * Gets the metadata about the record task
+         *
+         * @returns Object
+         */
+        getMetadata(): IRecordMeta {
+            return {
+                fields: {
+                    title: {
+                        text: strings.title,
+                        type: 'string'
+                    },
+                    description: {
+                        text: strings.description,
+                        type: 'string'
+                    }
+                }
+            }
+        }
         //endregion
 
         //region Events
