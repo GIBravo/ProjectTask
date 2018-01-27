@@ -1,4 +1,15 @@
 {
+  "connection":{
+    "host": "127.0.0.1",
+    "database": "todos",
+    "user": "root",
+    "password": ""
+  },
+
+  "records": [
+    "task"
+  ],
+
   "module-include":[
     "latte",
     "latte.api",

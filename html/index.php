@@ -10,7 +10,7 @@ include 'latte/latte.php';
 LatteModule::memoryLoad('latte.api');
 
 // Load app
-LatteModule::loadMain('app');
+LatteModule::loadMain('app', 'es');
 
 /// Create document
 $doc = new LatteDocument();
