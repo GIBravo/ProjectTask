@@ -1,5 +1,9 @@
 {
   "module-include":[
-    "latte"
+    "latte",
+    "latte.api",
+    "latte.data",
+    "latte.element",
+    "latte.ui"
   ]
 }

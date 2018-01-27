@@ -10,7 +10,7 @@ module latte {
          * Start your program on the constructor.
          */
         constructor() {
-            log("Hello")
+            log("Hello");
         }
 
     }
