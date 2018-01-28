@@ -1,3 +1,6 @@
 title Titulo
 description Descripcion
 newTask Nueva Tarea
+deleteTask Eliminar Tarea
+editTask Editar Tarea
+newCategory Nueva Categoria

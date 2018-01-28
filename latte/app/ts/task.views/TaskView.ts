@@ -3,7 +3,7 @@ module latte {
     /**
      *
      */
-    export class MainTaskView extends ToolbarView {
+    export class TaskView extends ToolbarView {
 
         //region Static
         //endregion
@@ -19,8 +19,11 @@ module latte {
         }
 
         //region Private Methods
+        /**
+         * Load all task.
+         */
         private loadTask(){
-            Task.catalog().send( tasks => {
+            Task.byIdCategory(this.category.idcategory).send( tasks => {
 
                 this.listView.items.clear();
 
@@ -41,18 +44,42 @@ module latte {
         //region Methods
 
         /**
+         * Raises the <c>category</c> event
+         */
+        onCategoryChanged(){
+            if(this._categoryChanged){
+                this._categoryChanged.raise();
+            }
+            this.loadTask();
+        }
+
+        /**
          * Override
          */
         onLoad(){
             super.onLoad();
             this.toolbar.items.addArray([ this.btnNew, this.btnEdit, this.btnDelete ]);
             this.view = this.listView;
-
-            this.loadTask();
         }
         //endregion
 
         //region Events
+        /**
+         * Back field for event
+         */
+        private _categoryChanged: LatteEvent;
+
+        /**
+         * Gets an event raised when the value of the category property changes
+         *
+         * @returns {LatteEvent}
+         */
+        get categoryChanged(): LatteEvent{
+            if(!this._categoryChanged){
+                this._categoryChanged = new LatteEvent(this);
+            }
+            return this._categoryChanged;
+        }
         //endregion
 
         //region Properties
@@ -72,7 +99,7 @@ module latte {
          */
         get btnDelete(): ButtonItem {
             if (!this._btnDelete) {
-                this._btnDelete = new ButtonItem(strings.deleteRow, IconItem.deleteIcon(), () => {
+                this._btnDelete = new ButtonItem(strings.deleteTask, IconItem.deleteIcon(), () => {
                     let task = this.listView.selectedItem.tag as Task;
                     DialogView.confirmDelete( task.title, () => {
                         task.remove( () => { this.loadTask(); });
@@ -94,7 +121,7 @@ module latte {
          */
         get btnEdit(): ButtonItem {
             if (!this._btnEdit) {
-                this._btnEdit = new ButtonItem(strings.edit, IconItem.editIcon(), () => {
+                this._btnEdit = new ButtonItem(strings.editTask, IconItem.editIcon(), () => {
                     let task = this.listView.selectedItem.tag as DataRecord;
                     DataRecordDialogView.editRecord( task, () => {
                         this.loadTask();
@@ -118,12 +145,47 @@ module latte {
             if (!this._btnNew) {
                 this._btnNew = new ButtonItem(strings.newTask, IconItem.newIcon(), () => {
                     let task = new Task();
+
+                    task.idcategory = this.category.idcategory;
                     DataRecordDialogView.editRecord(task, () => {
                         this.loadTask();
                     }, strings.newTask );
                 });
             }
             return this._btnNew;
+        }
+
+        /**
+         * Property field
+         */
+        private _category: Category = null;
+
+        /**
+         * Gets or sets category
+         *
+         * @returns {Category}
+         */
+        get category(): Category{
+            return this._category;
+        }
+
+        /**
+         * Gets or sets category
+         *
+         * @param {Category} value
+         */
+        set category(value: Category){
+
+            // Check if value changed
+            let changed: boolean = value !== this._category;
+
+            // Set value
+            this._category = value;
+
+            // Trigger changed event
+            if(changed){
+                this.onCategoryChanged();
+            }
         }
 
         /**

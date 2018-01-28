@@ -11,7 +11,7 @@ module latte {
          * Start your program on the constructor.
          */
         constructor() {
-            View.mainView =  new MainTaskView();
+            View.mainView =  new ContainerView();
         }
 
     }
