@@ -61,6 +61,15 @@ module latte {
             this.toolbar.items.addArray([ this.btnNew, this.btnEdit, this.btnDelete ]);
             this.view = this.listView;
         }
+
+        /**
+         * Raises the <c>selectedTask</c> event
+         */
+        onSelectedTaskChanged(){
+            if(this._selectedTaskChanged){
+                this._selectedTaskChanged.raise();
+            }
+        }
         //endregion
 
         //region Events
@@ -79,6 +88,18 @@ module latte {
                 this._categoryChanged = new LatteEvent(this);
             }
             return this._categoryChanged;
+        }
+
+        /**
+         * Gets an event raised when the value of the selectedTask property changes
+         *
+         * @returns {LatteEvent}
+         */
+        get selectedTaskChanged(): LatteEvent{
+            if(!this._selectedTaskChanged){
+                this._selectedTaskChanged = new LatteEvent(this);
+            }
+            return this._selectedTaskChanged;
         }
         //endregion
 
@@ -205,9 +226,51 @@ module latte {
                     new ColumnHeader(strings.title),
                     new ColumnHeader(strings.description)
                 ]);
+                this._listView.selectedItemChanged.add( () => {
+                   this.selectedTask = this._listView.selectedItem.tag as Task;
+                });
             }
             return this._listView;
         }
+        
+        /**
+         * Property field
+         */
+        private _selectedTask: Task = null;
+        
+        /**
+         * Gets or sets task
+         *
+         * @returns {Task}
+         */
+        get selectedTask(): Task{
+            return this._selectedTask;
+        }
+        
+        /**
+         * Gets or sets task
+         *
+         * @param {Task} value
+         */
+        set selectedTask(value: Task){
+        
+            // Check if value changed
+            let changed: boolean = value !== this._selectedTask;
+            
+            // Set value
+            this._selectedTask = value;
+            
+            // Trigger changed event
+            if(changed){
+                this.onSelectedTaskChanged();
+            }
+        }
+        
+        /**
+         * Back field for event
+         */
+        private _selectedTaskChanged: LatteEvent;
+
         //endregion
 
     }

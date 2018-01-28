@@ -29,7 +29,7 @@ module latte {
             super.onLoad();
 
             this.sideView = this.categoryView;
-            this.view = this.taskView;
+            this.view = this.taskDetailView;
 
         }
         //endregion
@@ -56,28 +56,29 @@ module latte {
                 this._categoryView = new CategoryView();
 
                 this._categoryView.selectedCategoryChanged.add( () => {
-                    this.taskView.category = this._categoryView.selectedCategory;
+                    this.taskDetailView.taskView.category = this._categoryView.selectedCategory;
                 });
             }
             return this._categoryView;
         }
 
         /**
-         * Field for taskView property
+         * Field for taskDetailView property
          */
-        private _taskView: TaskView;
+        private _taskDetailView: TaskDetailView;
 
         /**
-         * Gets the task view
+         * Gets the task detail view
          *
-         * @returns {TaskView}
+         * @returns {TaskDetailView}
          */
-        get taskView(): TaskView {
-            if (!this._taskView) {
-                this._taskView = new TaskView();
+        get taskDetailView(): TaskDetailView {
+            if (!this._taskDetailView) {
+                this._taskDetailView = new TaskDetailView();
             }
-            return this._taskView;
+            return this._taskDetailView;
         }
+
 
         //endregion
 
