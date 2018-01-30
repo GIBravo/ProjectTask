@@ -31,8 +31,15 @@ module latte {
                     tasks.forEach( task => {
 
                         let listItem = new ListViewItem( this.listView );
-                        listItem.setText(0, task.title );
-                        listItem.setText(1, task.description );
+
+                        let labelTitle = new LabelItem();
+                        task.addBind('title',labelTitle, 'text');
+
+                        let labelDescription = new LabelItem();
+                        task.addBind('description', labelDescription, 'text');
+
+                        listItem.setItem(0, labelTitle );
+                        listItem.setItem(1, labelDescription );
 
                         listItem.tag = task;
                     });

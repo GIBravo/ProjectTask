@@ -32,6 +32,18 @@ module latte {
         }
 
         /**
+         * Override
+         */
+        /**onUnsavedChangesChanged(){
+            super.onUnsavedChangesChanged();
+
+            log(this.unsavedChanges);
+
+            if( this.unsavedChanges )
+                this.saveChanges();
+        }**/
+
+        /**
          * Raises the <c>task</c> event
          */
         onTaskChanged(){
@@ -112,6 +124,8 @@ module latte {
         get formTask(): DataRecordFormItem {
             if (!this._formTask) {
                 this._formTask = new DataRecordFormItem();
+
+                this.saveItems.add( this._formTask );
             }
             return this._formTask;
         }

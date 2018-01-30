@@ -4,3 +4,4 @@ newTask Nueva Tarea
 deleteTask Eliminar Tarea
 editTask Editar Tarea
 newCategory Nueva Categoria
+done Hecho

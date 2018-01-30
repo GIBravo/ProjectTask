@@ -33,6 +33,10 @@ module latte{
                     description: {
                         text: strings.description,
                         type: 'string'
+                    },
+                    done:{
+                        text: strings.done,
+                        type: 'boolean'
                     }
                 }
             }

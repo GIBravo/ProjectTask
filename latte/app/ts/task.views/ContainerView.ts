@@ -31,6 +31,8 @@ module latte {
             this.sideView = this.categoryView;
             this.view = this.taskDetailView;
 
+            this.addClass('todos');
+
         }
         //endregion
 

@@ -1,0 +1,6 @@
+.todos .latte-item.clickable.selected,
+.todos .latte-item.clickable.with-face.selected{
+    border-color: #b6e097;
+    background-color: #b6e097;
+    color: white;
+}
