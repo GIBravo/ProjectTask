@@ -1,0 +1,18 @@
+.btnAdd {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: #527DE0;
+}
+
+.title{
+    font-size: 2em;
+    text-align: center;
+}
+
+.note{
+    border-style: solid;
+    border-radius: 5px;
+    background-color: #c4c4c4;
+    color: #1F48A1;
+}

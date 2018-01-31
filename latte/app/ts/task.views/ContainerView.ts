@@ -22,17 +22,14 @@ module latte {
         //endregion
 
         //region Methods
-        /**
-         * Override.
-         */
-        onLoad(){
+            /**
+             * Override.
+             */
+            onLoad(){
             super.onLoad();
 
             this.sideView = this.categoryView;
             this.view = this.taskDetailView;
-
-            this.addClass('todos');
-
         }
         //endregion
 
@@ -43,45 +40,43 @@ module latte {
         //endregion
 
         //region Components
-        /**
-         * Field for categoryView property
-         */
-        private _categoryView: CategoryView;
+            /**
+             * Field for categoryView property
+             */
+            private _categoryView: CategoryView;
 
-        /**
-         * Gets the category view
-         *
-         * @returns {CategoryView}
-         */
-        get categoryView(): CategoryView {
-            if (!this._categoryView) {
-                this._categoryView = new CategoryView();
+            /**
+             * Gets the category view
+             *
+             * @returns {CategoryView}
+             */
+            get categoryView(): CategoryView {
+                if (!this._categoryView) {
+                    this._categoryView = new CategoryView();
 
-                this._categoryView.selectedCategoryChanged.add( () => {
-                    this.taskDetailView.taskView.category = this._categoryView.selectedCategory;
-                });
+                    this._categoryView.selectedCategoryChanged.add( () => {
+                        this.taskDetailView.taskView.category = this._categoryView.selectedCategory;
+                    });
+                }
+                return this._categoryView;
             }
-            return this._categoryView;
-        }
 
-        /**
-         * Field for taskDetailView property
-         */
-        private _taskDetailView: TaskDetailView;
+            /**
+             * Field for taskDetailView property
+             */
+            private _taskDetailView: TaskDetailView;
 
-        /**
-         * Gets the task detail view
-         *
-         * @returns {TaskDetailView}
-         */
-        get taskDetailView(): TaskDetailView {
+            /**
+             * Gets the task detail view
+             *
+             * @returns {TaskDetailView}
+             */
+            get taskDetailView(): TaskDetailView {
             if (!this._taskDetailView) {
                 this._taskDetailView = new TaskDetailView();
             }
             return this._taskDetailView;
         }
-
-
         //endregion
 
     }

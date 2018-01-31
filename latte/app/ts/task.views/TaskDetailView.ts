@@ -22,17 +22,21 @@ module latte {
         //endregion
 
         //region Methods
-        /**
-         * Override.
-         */
-        onLoad(){
-            super.onLoad();
+            /**
+             * Override.
+             */
+            onLoad(){
+                super.onLoad();
 
-            this.sideSize = 370;
-            this.side = Side.RIGHT;
-            this.sideView = this.detailView;
-            this.view = this.taskView;
-        }
+                this.sideSize = 370;
+                this.side = Side.RIGHT;
+
+                let wrap = new View();
+                wrap.raw.appendChild( this.detailElement.raw );
+                this.sideView = wrap;
+
+                this.view = this.taskView;
+            }
         //endregion
 
         //region Events
@@ -44,41 +48,59 @@ module latte {
         //region Components
 
         /**
-         * Field for detailView property
+         * Field for detailElement property
          */
-        private _detailView: DetailView;
+        private _detailElement: DetailElement;
 
         /**
-         * Gets the detail view
+         * Gets the detail element
          *
-         * @returns {DetailView}
+         * @returns {DetailElement}
          */
-        get detailView(): DetailView {
-            if (!this._detailView) {
-                this._detailView = new DetailView();
+        get detailElement(): DetailElement {
+            if (!this._detailElement) {
+                this._detailElement = new DetailElement();
             }
-            return this._detailView;
+            return this._detailElement;
         }
 
-        /**
-         * Field for taskView property
-         */
-        private _taskView: TaskView;
 
         /**
-         * Gets the task view
-         *
-         * @returns {TaskView}
-         */
-        get taskView(): TaskView {
-            if (!this._taskView) {
-                this._taskView = new TaskView();
-                this._taskView.selectedTaskChanged.add( () => {
-                   this.detailView.task = this._taskView.selectedTask;
-                });
+             * Field for detailView property
+             */
+            private _detailView: DetailView;
+
+            /**
+             * Gets the detail view
+             *
+             * @returns {DetailView}
+             */
+            get detailView(): DetailView {
+                if (!this._detailView) {
+                    this._detailView = new DetailView();
+                }
+                return this._detailView;
             }
-            return this._taskView;
-        }
+
+            /**
+             * Field for taskView property
+             */
+            private _taskView: TaskView;
+
+            /**
+             * Gets the task view
+             *
+             * @returns {TaskView}
+             */
+            get taskView(): TaskView {
+                if (!this._taskView) {
+                    this._taskView = new TaskView();
+                    this._taskView.selectedTaskChanged.add( () => {
+                       this.detailElement.task = this._taskView.selectedTask;
+                    });
+                }
+                return this._taskView;
+            }
         //endregion
 
     }

@@ -22,50 +22,49 @@ module latte {
         //endregion
 
         //region Methods
-
-        /**
-         * Override
-         */
-        onLoad(){
-            super.onLoad();
-            this.items.add( this.formTask );
-        }
-
-        /**
-         * Override
-         */
-        /**onUnsavedChangesChanged(){
-            super.onUnsavedChangesChanged();
-
-            log(this.unsavedChanges);
-
-            if( this.unsavedChanges )
-                this.saveChanges();
-        }**/
-
-        /**
-         * Raises the <c>task</c> event
-         */
-        onTaskChanged(){
-            if(this._taskChanged){
-                this._taskChanged.raise();
+            /**
+             * Override
+             */
+            onLoad(){
+                super.onLoad();
+                this.items.add( this.formTask );
             }
-            this.formTask.record = this.task;
-        }
+
+            /**
+             * Override
+             */
+            /**onUnsavedChangesChanged(){
+                super.onUnsavedChangesChanged();
+
+                log(this.unsavedChanges);
+
+                if( this.unsavedChanges )
+                    this.saveChanges();
+            }**/
+
+            /**
+             * Raises the <c>task</c> event
+             */
+            onTaskChanged(){
+                if(this._taskChanged){
+                    this._taskChanged.raise();
+                }
+                this.formTask.record = this.task;
+            }
         //endregion
 
         //region Events
-        /**
-         * Back field for event
-         */
-        private _taskChanged: LatteEvent;
+            /**
+             * Back field for event
+             */
+            private _taskChanged: LatteEvent;
 
-        /**
-         * Gets an event raised when the value of the task property changes
-         *
-         * @returns {LatteEvent}
-         */
-        get taskChanged(): LatteEvent{
+            /**
+             * Gets an event raised when the value of the task property changes
+             *
+             * @returns {LatteEvent}
+             */
+            get taskChanged(): LatteEvent{
             if(!this._taskChanged){
                 this._taskChanged = new LatteEvent(this);
             }
@@ -74,27 +73,26 @@ module latte {
         //endregion
 
         //region Properties
+            /**
+             * Property field
+             */
+            private _task: Task = null;
 
-        /**
-         * Property field
-         */
-        private _task: Task = null;
+            /**
+             * Gets or sets task
+             *
+             * @returns {Task}
+             */
+            get task(): Task{
+                return this._task;
+            }
 
-        /**
-         * Gets or sets task
-         *
-         * @returns {Task}
-         */
-        get task(): Task{
-            return this._task;
-        }
-
-        /**
-         * Gets or sets task
-         *
-         * @param {Task} value
-         */
-        set task(value: Task){
+            /**
+             * Gets or sets task
+             *
+             * @param {Task} value
+             */
+            set task(value: Task){
 
             // Check if value changed
             let changed: boolean = value !== this._task;
@@ -107,21 +105,20 @@ module latte {
                 this.onTaskChanged();
             }
         }
-
         //endregion
 
         //region Components
-        /**
-         * Field for formTask property
-         */
-        private _formTask: DataRecordFormItem;
+            /**
+             * Field for formTask property
+             */
+            private _formTask: DataRecordFormItem;
 
-        /**
-         * Gets the form task
-         *
-         * @returns {DataRecordFormItem}
-         */
-        get formTask(): DataRecordFormItem {
+            /**
+             * Gets the form task
+             *
+             * @returns {DataRecordFormItem}
+             */
+            get formTask(): DataRecordFormItem {
             if (!this._formTask) {
                 this._formTask = new DataRecordFormItem();
 

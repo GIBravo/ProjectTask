@@ -36,7 +36,7 @@ module latte{
                     },
                     done:{
                         text: strings.done,
-                        type: 'boolean'
+                        type: 'switch'
                     }
                 }
             }
